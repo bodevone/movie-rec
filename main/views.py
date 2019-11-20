@@ -28,7 +28,7 @@ def main_page(request):
                     continue
                 temp = {"imdb_id":row[7], "original_title":row[9], "poster_path":"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + row[12]}
                 movies[line_count] = temp
-            if line_count == 40:
+            if line_count == 20:
                 break
             line_count += 1
     data["movies"] = movies
@@ -54,7 +54,7 @@ def dislike_page(request):
                     continue
                 temp = {"imdb_id":row[7], "original_title":row[9], "poster_path":"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + row[12]}
                 movies[line_count] = temp
-            if line_count == 40:
+            if line_count == 20:
                 break
             line_count += 1
     data["movies"] = movies
@@ -81,7 +81,7 @@ def search(movie, status):
                 movies[line_count] = temp
                 line_count += 1
 
-            if line_count == 40:
+            if line_count == 20:
                 break
     data["movies"] = movies
     return data
