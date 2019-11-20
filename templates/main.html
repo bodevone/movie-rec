@@ -3,7 +3,29 @@
 {% load static from staticfiles %}
 
 {% block content %}
-
+{% if data.status == "like" %}
+<div class="mainmenu-area" data-spy="affix" data-offset-top="100">
+    <div class="container">
+        <!--Logo-->
+        <div class="navbar-header">
+            <a href="{% url 'main' %}" class="navbar-brand logo">
+                <h2>movie</h2>
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="mainmenu-area" data-spy="affix" data-offset-top="100">
+    <div class="container">
+        <!--Logo-->
+        <div class="navbar-header">
+            <a href="{% url 'dis' %}" class="navbar-brand logo">
+                <h2>movie</h2>
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 <section class="white-bg section-padding" id="feature-page">
     <div class="container">
@@ -44,7 +66,7 @@
                         <img src={{ value.poster_path }} alt="">
                     </div>
                     <h3 id="myVar">{{ value.original_title }}</h3>
-                    <a href="#" class="button" onclick="iterMovie('{{value.original_title}}')">Select</a>
+                    <a href="" class="button" onclick="iterMovie('{{value.original_title}}')">Select</a>
                 </div>
             </div>
             {% endfor %}

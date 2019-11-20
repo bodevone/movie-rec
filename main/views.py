@@ -23,14 +23,12 @@ def main_page(request):
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-            if line_count == 0:
-                print(row)
             if line_count != 0:
                 if float(row[11]) < 17:
                     continue
                 temp = {"imdb_id":row[7], "original_title":row[9], "poster_path":"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + row[12]}
                 movies[line_count] = temp
-            if line_count == 20:
+            if line_count == 40:
                 break
             line_count += 1
     data["movies"] = movies
@@ -52,11 +50,11 @@ def dislike_page(request):
         line_count = 0
         for row in csv_reader:
             if line_count != 0:
-                if float(row[11]) > 15:
+                if float(row[11]) > 14:
                     continue
                 temp = {"imdb_id":row[7], "original_title":row[9], "poster_path":"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + row[12]}
                 movies[line_count] = temp
-            if line_count == 10:
+            if line_count == 40:
                 break
             line_count += 1
     data["movies"] = movies
@@ -78,13 +76,12 @@ def search(movie, status):
             if line_count == 0:
                 line_count += 1
                 continue
-            print(movie, row[9])
             if movie.lower() in row[9].lower():
                 temp = {"imdb_id":row[7], "original_title":row[9], "poster_path":"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + row[12]}
                 movies[line_count] = temp
                 line_count += 1
 
-            if line_count == 20:
+            if line_count == 40:
                 break
     data["movies"] = movies
     return data
