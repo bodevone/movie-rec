@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% block content %}
+
+
+<section class="white-bg section-padding" id="feature-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                <div class="page-title">
+                  {% if data.status == "like" %}
+                  <h2 id="mov">SELECT YOUR FAVORITE MOVIES</h2>
+                  {% else %}
+                  <h2 id="mov">SELECT YOUR UNFAVOURITE MOVIES</h2>
+                  {% endif %}
+                  <h3 id="left">LEFT</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+          {% if data.status == "like" %}
+          <form action="{% url 'main' %}" id="contact-form" method="post" class="contact-form">
+              {% csrf_token %}
+              <input type="text" id="form-subject" name="movie_search" class="form-control" placeholder="Search..">
+              <button type="submit" class="button">Search</button>
+          </form>
+          {% else %}
+          <form action="{% url 'dis' %}" id="contact-form" method="post" class="contact-form">
+              {% csrf_token %}
+              <input type="text" id="form-subject" name="movie_search" class="form-control" placeholder="Search..">
+              <button type="submit" class="button">Search</button>
+          </form>
+          {% endif %}
+
+
+        </div>
+        <div class="row">
+            {% for key, value in data.movies.items %}
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="box">
+                    <div class="box-icon">
+                        <img src={{ value.poster_path }} alt="">
+                    </div>
+                    <h3 id="myVar">{{ value.original_title }}</h3>
+                    <a href="#" class="button" onclick="iterMovie('{{value.original_title}}')">Select</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+      var num;
+      var fav = document.getElementById("mov").innerHTML;
+      if (fav == "SELECT YOUR FAVORITE MOVIES") {
+        if (sessionStorage.count) {
+          num = 3 - Number(sessionStorage.count)
+        } else {
+          num = 3
+        }
+      } else {
+        num = 6 - Number(sessionStorage.count)
+      }
+
+      document.getElementById("left").innerHTML = num + " LEFT"
+
+      function iterMovie(title) {
+
+        // var title = document.getElementById("myVar").innerHTML;
+
+        if (sessionStorage.count) {
+          sessionStorage.count = Number(sessionStorage.count) + 1;
+          if (sessionStorage.count == 2) {
+            sessionStorage.setItem("movie2", title);
+            window.location=window.location;
+          } else if (sessionStorage.count == 3) {
+            sessionStorage.setItem("movie3", title);
+            window.location.href = window.location.origin + "/dislike";
+          } else if (sessionStorage.count == 4) {
+            sessionStorage.setItem("dmovie1", title);
+            window.location=window.location;
+          } else if (sessionStorage.count == 5) {
+            sessionStorage.setItem("dmovie2", title);
+            window.location=window.location;
+          } else if (sessionStorage.count == 6) {
+            sessionStorage.setItem("dmovie3", title);
+            sessionStorage.removeItem("count");
+
+            url = "/result/"+sessionStorage.movie1 + "/" + sessionStorage.movie2 + "/" +  sessionStorage.movie3 + "/" +  sessionStorage.dmovie1 + "/" +  sessionStorage.dmovie2 + "/" +  sessionStorage.dmovie3;
+            window.location.href = window.location.origin + url;
+
+          }
+        } else {
+          sessionStorage.count = 1;
+          sessionStorage.setItem("movie1", title);
+          window.location=window.location;
+        }
+      }
+
+    </script>
+
+</section>
+
+
+{% endblock %}

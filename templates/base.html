@@ -1,0 +1,89 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title>Movie Recommendation</title>
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+    <!-- Plugin-CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <!-- Main-Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+</head>
+
+
+<body>
+
+  <div class="preloader">
+      <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+      </div>
+  </div>
+
+  <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
+      <div class="container">
+          <!--Logo-->
+          <div class="navbar-header">
+              <a href="#" class="navbar-brand logo">
+                  <h2>movie</h2>
+              </a>
+          </div>
+      </div>
+  </div>
+
+  {% block content %}
+
+  {% endblock %}
+
+  <div class="footer-bottom">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12 text-center">
+                  <p>Big Data Project. Created by Alibi Shalgymbay and Dias Sadykov</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <!--Vendor-JS-->
+  <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+  <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+  <!--Plugin-JS-->
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/contact-form.js' %}"></script>
+  <script src="{% static 'js/jquery.parallax-1.1.3.js' %}"></script>
+  <script src="{% static 'js/scrollUp.min.js' %}"></script>
+  <script src="{% static 'js/magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/wow.min.js' %}"></script>
+
+  <!--Main-active-JS-->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
