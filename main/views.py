@@ -119,8 +119,6 @@ def movie_predict(movie1, movie2, movie3, movie4, movie5, movie6):
     id_map = id_map.merge(smd[['title', 'id']], on='id').set_index('title')
     indices_map = id_map.set_index('id')
 
-    id_map.to_csv("id_map.csv")
-
     reader = Reader()
     ratings = pd.read_csv(ratings_path)
 
