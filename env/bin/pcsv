@@ -1,0 +1,7 @@
+#!/Users/dias/Documents/Study/movie-rec/env/bin/python3.7
+import pcsv
+from jtutils import fix_broken_pipe
+
+if __name__ == "__main__":
+    fix_broken_pipe()
+    pcsv.pcsv()
