@@ -3,7 +3,7 @@ certifi==2019.9.11
 chardet==3.0.4
 cycler==0.10.0
 demjson==2.2.4
-Django==2.2.7
+Django==2.2.18
 gunicorn==20.0.0
 idna==2.8
 joblib==0.14.0
