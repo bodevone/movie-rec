@@ -1,21 +1,15 @@
 {% extends "base.html" %}
 
-{% load static from staticfiles %}
+{% load static %}
 
 {% block content %}
 <div class="mainmenu-area" data-spy="affix" data-offset-top="100">
     <div class="container">
         <!--Logo-->
         <div class="navbar-header">
-          {% if data.status == "like" %}
             <a href="{% url 'main' %}" class="navbar-brand logo">
                 <h2>movie</h2>
             </a>
-          {% else %}
-            <a href="{% url 'dis' %}" class="navbar-brand logo">
-                <h2>movie</h2>
-            </a>
-          {% endif %}
         </div>
     </div>
 </div>
@@ -26,34 +20,20 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                 <div class="page-title">
-                  {% if data.status == "like" %}
                   <h2 id="mov">SELECT YOUR FAVORITE MOVIES</h2>
-                  {% else %}
-                  <h2 id="mov">SELECT YOUR UNFAVOURITE MOVIES</h2>
-                  {% endif %}
                   <h3 id="left">LEFT</h3>
                 </div>
             </div>
         </div>
         <div class="row text-center">
-          {% if data.status == "like" %}
           <form action="{% url 'main' %}" id="contact-form" method="post" class="contact-form">
               {% csrf_token %}
-              <input type="text" id="form-subject" name="movie_search" class="form-control" placeholder="Search..">
+              <input type="text" id="form-subject" name="movie_text" class="form-control" placeholder="Search..">
               <button type="submit" class="button">Search</button>
           </form>
-          {% else %}
-          <form action="{% url 'dis' %}" id="contact-form" method="post" class="contact-form">
-              {% csrf_token %}
-              <input type="text" id="form-subject" name="movie_search" class="form-control" placeholder="Search..">
-              <button type="submit" class="button">Search</button>
-          </form>
-          {% endif %}
-
-
         </div>
         <div class="row">
-            {% for key, value in data.movies.items %}
+            {% for key, value in movies.items %}
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="box">
                     <div class="box-icon">
@@ -71,15 +51,10 @@
     <script type="text/javascript">
 
       var num;
-      var fav = document.getElementById("mov").innerHTML;
-      if (fav == "SELECT YOUR FAVORITE MOVIES") {
-        if (sessionStorage.count) {
-          num = 3 - Number(sessionStorage.count)
-        } else {
-          num = 3
-        }
+      if (sessionStorage.count) {
+        num = 3 - Number(sessionStorage.count)
       } else {
-        num = 6 - Number(sessionStorage.count)
+        num = 3
       }
 
       document.getElementById("left").innerHTML = num + " LEFT"
@@ -93,18 +68,9 @@
             window.location=window.location;
           } else if (sessionStorage.count == 3) {
             sessionStorage.setItem("movie3", title);
-            window.location.href = window.location.origin + "/dislike";
-          } else if (sessionStorage.count == 4) {
-            sessionStorage.setItem("dmovie1", title);
-            window.location=window.location;
-          } else if (sessionStorage.count == 5) {
-            sessionStorage.setItem("dmovie2", title);
-            window.location=window.location;
-          } else if (sessionStorage.count == 6) {
-            sessionStorage.setItem("dmovie3", title);
             sessionStorage.removeItem("count");
 
-            url = "/result/"+sessionStorage.movie1 + "/" + sessionStorage.movie2 + "/" +  sessionStorage.movie3 + "/" +  sessionStorage.dmovie1 + "/" +  sessionStorage.dmovie2 + "/" +  sessionStorage.dmovie3;
+            url = "/result/"+sessionStorage.movie1 + "/" + sessionStorage.movie2 + "/" +  sessionStorage.movie3;
             window.location.href = window.location.origin + url;
 
           }
@@ -115,7 +81,6 @@
         }
         return false;
       }
-
 
     </script>
 
